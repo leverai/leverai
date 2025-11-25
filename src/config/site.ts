@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 export const siteConfig = {
   name: "Lever AI",
   description: "Timeless engineering with modern intelligence.",
-  productsTagline: "Made with you in mind.",
+  productsTagline: "Made with love and care.",
   email: "leverai@leverai.tech",
   links: {
     github: "https://github.com/mhdmartini",
@@ -27,7 +27,7 @@ export const siteConfig = {
   products: [
     {
       name: "Guesstimate",
-      description: "The first Lever AI mobile app. Master the art of estimation.",
+      description: "The Reasoning Trivia Game you've been waiting for.",
       icon: "Calculator", // We'll map this to a Lucide icon
       link: "#", // Add link if available
       status: "In Development",
