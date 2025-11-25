@@ -21,7 +21,7 @@ export const siteConfig = {
         github: "https://github.com/mhdmartini",
         linkedin: "https://linkedin.com/in/mhdmartini",
       },
-      skills: ["Full Stack Dev", "AI/ML", "Product Design", "Mobile Dev"],
+      skills: ["AI/ML", "Software Eng.", "Product Design", "Cloud"],
     },
   ],
   products: [
