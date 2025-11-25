@@ -3,6 +3,7 @@
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export function Hero() {
   const handleSmoothScroll = (e: React.MouseEvent<HTMLButtonElement>, targetId: string) => {
@@ -16,7 +17,16 @@ export function Hero() {
   return (
     <section className="container mx-auto px-4 py-24 md:py-32 flex flex-col items-center text-center space-y-8">
       <div className="space-y-4 max-w-3xl">
-        <h1 className="text-5xl md:text-7xl font-black tracking-tighter">
+        <h1 className="text-5xl md:text-7xl font-black tracking-tighter flex items-center justify-center gap-3">
+          <Image 
+            src="/icon.svg" 
+            alt="" 
+            width={100} 
+            height={100}
+            className="h-[1em] w-auto"
+            priority
+            unoptimized
+          />
           {siteConfig.name}
         </h1>
         <p className="text-xl md:text-2xl font-medium text-muted-foreground max-w-2xl mx-auto">
