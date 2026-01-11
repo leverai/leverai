@@ -26,11 +26,15 @@ export const siteConfig = {
   ],
   products: [
     {
-      name: "Guesstimate",
+      name: "Guesstimate: Not Trivia!",
       description: "The Reasoning Trivia Game you've been waiting for.",
-      icon: "Calculator", // We'll map this to a Lucide icon
-      link: "#", // Add link if available
-      status: "In Development",
+      icon: "/guesstimate/icon.png",
+      link: "https://play.google.com/store/apps/details?id=tech.leverai.guesstimate",
+      links: {
+        playStore: "https://play.google.com/store/apps/details?id=tech.leverai.guesstimate",
+        appStore: "https://apps.apple.com/app/id6756033242",
+      },
+      status: "",
     },
   ],
 };

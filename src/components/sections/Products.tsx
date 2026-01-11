@@ -8,6 +8,22 @@ const iconMap = {
   Calculator: Calculator,
 };
 
+function StoreButton({ href, icon, title, subtitle }: { href: string; icon: string; title: string; subtitle: string }) {
+  return (
+    <Link
+      href={href}
+      target="_blank"
+      className="inline-flex items-center gap-2.5 px-3 py-1.5 bg-black hover:bg-zinc-800 transition-colors rounded-[8px] border border-zinc-800 min-w-[140px]"
+    >
+      <img src={icon} alt={title} className="w-6 h-6 invert" />
+      <div className="flex flex-col items-start leading-none -mt-0.5">
+        <span className="text-[10px] font-medium text-white">{subtitle}</span>
+        <span className="text-[15px] font-bold text-white mt-0.5">{title}</span>
+      </div>
+    </Link>
+  );
+}
+
 export function Products() {
   return (
     <section id="products" className="container mx-auto px-4 py-16 space-y-12">
@@ -23,30 +39,56 @@ export function Products() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {siteConfig.products.map((product) => {
           const Icon = iconMap[product.icon as keyof typeof iconMap] || Calculator;
-          
+          const isPathIcon = product.icon.startsWith("/");
+          // We removed the special "isGuesstimate" check to standardize the card look.
+
           return (
-            <Card key={product.name} className="card hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all duration-200 bg-card">
-              <CardHeader>
-                <div className="flex justify-between items-start">
-                  <div className="p-3 bg-secondary border-2 border-black rounded-md">
-                    <Icon className="w-8 h-8" />
+            <Card key={product.name} className="card hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all duration-200 bg-card flex flex-col">
+              <CardHeader className="flex-grow">
+                <div className="flex flex-row items-start gap-6">
+                  <div className={`flex-shrink-0 flex items-center justify-center border-2 border-black rounded-xl overflow-hidden ${isPathIcon ? 'w-24 h-24 bg-white' : 'w-24 h-24 bg-secondary'}`}>
+                    {isPathIcon ? (
+                      <img src={product.icon} alt={product.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <Icon className="w-12 h-12" />
+                    )}
                   </div>
-                  <Badge variant="outline" className="border-2 border-black font-bold bg-yellow-300 text-black rounded-none">
-                    {product.status}
-                  </Badge>
+                  
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <CardTitle className="text-2xl font-bold">{product.name}</CardTitle>
+                      {product.status && (
+                        <Badge variant="outline" className="border-2 border-black font-medium bg-yellow-300 text-black rounded-none">
+                          {product.status}
+                        </Badge>
+                      )}
+                    </div>
+                    <CardDescription className="text-base font-medium text-black/70 leading-relaxed">
+                      {product.description}
+                    </CardDescription>
+                  </div>
                 </div>
-                <CardTitle className="text-2xl font-bold mt-4">{product.name}</CardTitle>
-                <CardDescription className="text-base font-medium text-black/70">
-                  {product.description}
-                </CardDescription>
               </CardHeader>
-              <CardContent>
-                <Link 
-                  href={product.link} 
-                  className="inline-flex items-center font-bold hover:underline decoration-2 underline-offset-4"
-                >
-                  Learn more <ArrowUpRight className="ml-1 w-4 h-4" />
-                </Link>
+              <CardContent className="space-y-6 pt-0">
+                <div className="flex flex-wrap gap-3">
+                  {product.links?.playStore && (
+                    <StoreButton 
+                      href={product.links.playStore}
+                      icon="/playstore.svg"
+                      subtitle="GET IT ON"
+                      title="Google Play"
+                    />
+                  )}
+                  {product.links?.appStore && (
+                    <StoreButton 
+                      href={product.links.appStore}
+                      icon="/apple.svg"
+                      subtitle="Download on the"
+                      title="App Store"
+                    />
+                  )}
+                </div>
+
               </CardContent>
             </Card>
           );
